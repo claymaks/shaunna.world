@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaunna's World</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ff1493; /* Bright pink background */
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="%23000" stroke="%23fff" stroke-width="2"/></svg>'), auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-text {
+            font-size: 4rem;
+            font-weight: bold;
+            color: black;
+            transform: rotate(-15deg);
+            text-align: center;
+            animation: pulse 2s ease-in-out infinite;
+            margin-bottom: 50px;
+            text-shadow: 3px 3px 0px rgba(255,255,255,0.3);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: rotate(-15deg) scale(1);
+            }
+            50% {
+                transform: rotate(-15deg) scale(1.2);
+            }
+        }
+
+        .spinning-image {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #ff69b4, #ff1493, #dc143c, #b22222);
+            border-radius: 50%;
+            border: 5px solid black;
+            transition: transform 0.8s ease-in-out;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 0px black;
+        }
+
+        .spinning-image:hover {
+            transform: rotate(360deg);
+        }
+
+        .spinning-image.reverse {
+            transform: rotate(-360deg);
+        }
+
+        /* Fun decorative elements */
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: yellow;
+            border-radius: 50%;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        .sparkle:nth-child(1) {
+            top: 10%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+
+        .sparkle:nth-child(2) {
+            top: 20%;
+            right: 15%;
+            animation-delay: 0.5s;
+        }
+
+        .sparkle:nth-child(3) {
+            bottom: 15%;
+            left: 10%;
+            animation-delay: 1s;
+        }
+
+        .sparkle:nth-child(4) {
+            bottom: 20%;
+            right: 25%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .main-text {
+                font-size: 2.5rem;
+            }
+            
+            .spinning-image {
+                width: 150px;
+                height: 150px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-text {
+                font-size: 2rem;
+            }
+            
+            .spinning-image {
+                width: 120px;
+                height: 120px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative sparkles -->
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+
+    <!-- Main content -->
+    <h1 class="main-text">MY FRIEND SHAUNNA</h1>
+    
+    <div class="spinning-image" id="spinningImage">
+        PLACEHOLDER<br>IMAGE
+    </div>
+
+    <script>
+        // Get the spinning image element
+        const spinningImage = document.getElementById('spinningImage');
+        
+        // Mouse enter event - spin clockwise
+        spinningImage.addEventListener('mouseenter', function() {
+            this.style.transform = 'rotate(360deg)';
+            this.classList.remove('reverse');
+        });
+        
+        // Mouse leave event - spin counter-clockwise
+        spinningImage.addEventListener('mouseleave', function() {
+            this.style.transform = 'rotate(-360deg)';
+            this.classList.add('reverse');
+        });
+
+        // Reset rotation after animation completes
+        spinningImage.addEventListener('transitionend', function() {
+            if (this.classList.contains('reverse')) {
+                this.style.transform = 'rotate(0deg)';
+                this.classList.remove('reverse');
+            } else {
+                this.style.transform = 'rotate(0deg)';
+            }
+        });
+
+        // Add some fun interactive elements
+        document.addEventListener('click', function(e) {
+            // Create a temporary sparkle effect at click position
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = e.clientX + 'px';
+            sparkle.style.top = e.clientY + 'px';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.zIndex = '1000';
+            document.body.appendChild(sparkle);
+            
+            // Remove the sparkle after animation
+            setTimeout(() => {
+                if (sparkle.parentNode) {
+                    sparkle.parentNode.removeChild(sparkle);
+                }
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
