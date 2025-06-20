@@ -9,7 +9,7 @@ body {
     font-family: Arial, sans-serif;
     height: 100vh;
     overflow: hidden;
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="%23000" stroke="%23fff" stroke-width="2"/></svg>'), auto;
+    cursor: url('/assets/mouse.png'), auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -39,11 +39,8 @@ body {
 .spinning-image {
     width: 200px;
     height: 200px;
-    background: linear-gradient(45deg, #ff69b4, #ff1493, #dc143c, #b22222);
     border-radius: 50%;
-    border: 5px solid black;
     transition: transform 0.8s ease-in-out;
-    cursor: pointer;
     position: relative;
     display: flex;
     align-items: center;
@@ -123,6 +120,7 @@ body {
 @media (max-width: 480px) {
     .main-text {
         font-size: 2rem;
+        margin-bottom: 100px;
     }
     
     .spinning-image {
